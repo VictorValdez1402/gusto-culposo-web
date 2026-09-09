@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gusto Culposo | Pedidos</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+
+  <!-- Barra de Navegacion Sticky -->
+  <header class="navbar">
+    <div class="logo">
+      <div class="brand-text">
+        <h1>Gusto Culposo</h1>
+        <span>Sin Culpa, Solo Antojo.</span>
+      </div>
+    </div>
+
+    <!-- Carrito Circular con Badge flotante -->
+    <div class="cart-wrapper" id="openCartBtn">
+      <button class="cart-circle-btn" aria-label="Ver carrito">
+        <i class="fa-solid fa-cart-shopping"></i>
+      </button>
+      <span class="cart-badge" id="cartCount">0</span>
+    </div>
+  </header>
+
+  <!-- Banner Extendido -->
+  <section class="hero-banner">
+    <img src="banner.jpg" alt="Gusto Culposo Banner" class="hero-banner-img">
+  </section>
+
+<!-- Barra de Aviso -->
+  <section class="alert-bar">
+    <i class="fa-solid fa-motorcycle" style="margin-right: 6px;"></i> Envíos a domicilio disponibles a partir de <strong>$300 MXN</strong>
+  </section>
+
+  <!-- Pestañas de Navegacion (Menu / Cotiza tu evento) -->
+  <nav class="sub-nav-tabs">
+    <button type="button" class="tab-btn active" id="tabMenuBtn" onclick="switchTab('menu')">
+      <i class="fa-solid fa-utensils"></i> Menú
+    </button>
+    <button type="button" class="tab-btn" id="tabCotizaBtn" onclick="switchTab('cotiza')">
+      <i class="fa-solid fa-calendar-days"></i> Cotiza tu evento
+    </button>
+  </nav>
+
+  <!-- Seccion Dinamica: Catalogo de Menú -->
+  <main class="container" id="catalogoSection">
+    <div id="productSections"></div>
+  </main>
+
+  <!-- Seccion Dinamica: Cotiza tu evento (Oculta por defecto) -->
+  <section class="container hidden" id="cotizaSection">
+    <div class="coming-soon-card">
+      <i class="fa-solid fa-person-digging coming-soon-icon"></i>
+      <h3>Estamos trabajando próximamente</h3>
+      <p>Muy pronto podrás cotizar mesas de postres, barras interactivas y paquetes completos para tus eventos directamente desde aquí, para cotizar su evento manda mensaje al numero telefonico de esta pagina y con gusto le ayudamos a cotizar su evento.</p>
+    </div>
+  </section>
+
+<!-- Pie de Pagina Corporativo (Footer) -->
+  <footer class="main-footer">
+    <div class="footer-top-bar">
+      <div class="footer-contact-item">
+        <div class="footer-contact-icon">
+          <i class="fa-solid fa-headset"></i>
+        </div>
+        <div class="footer-contact-text">
+          <span>Servicio al Cliente:</span>
+          <strong><a href="tel:5661757432">56-61-75-74-32</a></strong>
+        </div>
+      </div>
+
+      <div class="footer-contact-item">
+        <div class="footer-contact-icon whatsapp-icon">
+          <i class="fa-brands fa-whatsapp"></i>
+        </div>
+        <div class="footer-contact-text">
+          <span>Envíanos un WhatsApp:</span>
+          <strong><a href="https://wa.me/525661757432" target="_blank">56-61-75-74-32</a></strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-columns-container">
+      <!-- Columna Ayuda -->
+      <div class="footer-col">
+        <h4>Ayuda</h4>
+        <ul>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('comoPedir')">¿Cómo hacer un pedido?</button></li>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('anticipos')">Pago y Anticipo (50% / 100%)</button></li>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('entregas')">Envíos y Ubicación GPS</button></li>
+          <li><a href="tel:5661757432" class="footer-link-btn">Servicio al Cliente</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna Servicios -->
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><button type="button" class="footer-link-btn" onclick="scrollToCatalog()">Menú Completo</button></li>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('mesaEventos')">Mesa de Postres & Snacks para Eventos</button></li>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('paquetes')">Paquetes para Fiestas</button></li>
+        </ul>
+      </div>
+
+      <!-- Columna Empresa -->
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('conocenos')">Conócenos</button></li>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('expos')">Participación en Expos</button></li>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('corporativos')">Participación en Corporativos</button></li>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('eventos')">Participación en Eventos</button></li>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('privacidad')">Aviso de Privacidad</button></li>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('terminos')">Términos y Condiciones</button></li>
+        </ul>
+      </div>
+
+      <!-- Columna Redes e Info -->
+      <div class="footer-col footer-col-social">
+        <h4>Síguenos</h4>
+        <p class="social-text">Descubre promociones y nuevos antojos en nuestras redes:</p>
+        <div class="social-links-row">
+          <a href="https://instagram.com/gustoculposo_mx_" target="_blank" class="social-circle-btn" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://wa.me/525661757432" target="_blank" class="social-circle-btn" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+          <a href="mailto:gustoculposo31@gmail.com" class="social-circle-btn" aria-label="Correo electrónico">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+        </div>
+        <div class="social-ig-tag">
+          <span>Instagram:</span> <strong>@gustoculposo_mx_</strong>
+        </div>
+        <div class="social-ig-tag" style="margin-top: 4px;">
+          <span>Correo:</span> <strong><a href="mailto:gustoculposo31@gmail.com" style="color: #4a2c11; text-decoration: none;">gustoculposo31@gmail.com</a></strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra Inferior de Derechos (Fuera de las columnas para que abarque todo el ancho) -->
+    <div class="footer-bottom-bar">
+      <p>Gusto Culposo - Negocio de Postres y Snacks.</p>
+      <p class="footer-address">Priv. Guadalupe Col. Pantitlán #34. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Fondo Oscuro Modal -->
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+
+  <!-- Modal Portada de Revista (Estrategia de Marketing) -->
+  <div class="modal-ticket" id="revistaModal">
+    <div class="revista-box">
+      <button type="button" class="revista-close-btn" id="closeRevistaBtn">&times;</button>
+      <div class="revista-img-container">
+        <img src="revista-antojo.jpg" alt="Antojo Edicion Especial Gusto Culposo" class="revista-poster-img">
+      </div>
+      <div class="revista-action-footer">
+        <button type="button" id="buyRevistaBtn" class="btn-checkout" style="justify-content: center; font-size: 1rem;">
+          <i class="fa-solid fa-cart-plus" style="margin-right: 8px;"></i> Agregar y Comprar Edición Especial
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Informativo / Legal -->
+  <div class="modal-ticket" id="infoModal">
+    <div class="ticket-box info-modal-box">
+      <h3 id="infoModalTitle">Información</h3>
+      <div class="info-modal-scroll" id="infoModalContent"></div>
+      <button type="button" id="closeInfoModalBtn" class="btn-download" style="width:100%; border:none; margin-top:14px; cursor:pointer;">
+        Entendido
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal Selector de Preparacion Base y Extras -->
+  <div class="modal-ticket" id="extrasModal">
+    <div class="ticket-box extras-modal-box">
+      <h3 id="extrasItemTitle" style="color: #4a2c11; margin-bottom: 2px;">Personalizar</h3>
+      <p id="extrasItemDesc" style="font-size: 0.8rem; color: #666; margin-bottom: 12px;"></p>
+      
+      <div id="baseIngredientsSection" class="extras-list-wrapper" style="margin-bottom: 10px; display: none;">
+        <p style="font-size: 0.85rem; font-weight: 700; color: #4a2c11; margin-bottom: 8px;">
+          Ingredientes incluidos en tu pedido:
+        </p>
+        <div id="baseIngredientsFields"></div>
+      </div>
+
+      <div class="extras-list-wrapper">
+        <p style="font-size: 0.85rem; font-weight: 700; color: #4a2c11; margin-bottom: 8px;">¿Deseas agregar Extras?</p>
+        <div id="extrasCheckboxes" class="extras-grid"></div>
+
+        <div id="fruitDropdownSection" class="dropdown-subpanel hidden">
+          <p class="subpanel-title">Elige qué fruta extra agregar:</p>
+          <div class="option-pill-grid">
+            <label class="option-pill"><input type="radio" name="fruitChoice" value="Fresa" checked> Fresa</label>
+            <label class="option-pill"><input type="radio" name="fruitChoice" value="Plátano"> Plátano</label>
+            <label class="option-pill"><input type="radio" name="fruitChoice" value="Uva"> Uva</label>
+            <label class="option-pill"><input type="radio" name="fruitChoice" value="Durazno"> Durazno</label>
+            <label class="option-pill"><input type="radio" name="fruitChoice" value="Mixta"> Mixta</label>
+          </div>
+        </div>
+
+        <div id="toppingDropdownSection" class="dropdown-subpanel hidden">
+          <p class="subpanel-title">Elige el topping extra adicional:</p>
+          <div id="toppingOptionsGrid" class="option-pill-grid"></div>
+        </div>
+
+        <div id="aderezoDropdownSection" class="dropdown-subpanel hidden">
+          <p class="subpanel-title">Elige el aderezo extra adicional:</p>
+          <div id="aderezoOptionsGrid" class="option-pill-grid"></div>
+        </div>
+      </div>
+
+      <div class="extras-total-row">
+        <span>Subtotal producto:</span>
+        <strong id="extrasSubtotalDisplay">$0.00</strong>
+      </div>
+
+      <button type="button" id="confirmAddWithExtrasBtn" class="btn-checkout" style="margin-top: 10px;">
+        Agregar al Carrito
+      </button>
+      <button type="button" id="cancelExtrasBtn" class="close-map-btn" style="margin-top: 6px;">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- Panel Lateral del Carrito -->
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Tu Pedido</h3>
+      <button class="close-btn" id="closeCartBtn">&times;</button>
+    </div>
+
+    <div class="cart-scroll-area">
+      <div class="cart-items" id="cartItems"></div>
+
+      <!-- Datos del Cliente -->
+      <div class="form-group" style="margin-top: 15px;">
+        <label><strong>Tus Datos:</strong></label>
+        <input type="text" id="custName" placeholder="Nombre completo">
+        <input type="tel" id="custPhone" placeholder="Teléfono de contacto (10 dígitos)" maxlength="10">
+        <p id="phoneError" class="warning-text" style="display: none; margin-top: -4px; margin-bottom: 6px;"></p>
+        <input type="email" id="custEmail" placeholder="Correo electrónico (opcional)">
+        
+        <div class="fidelity-box">
+          <label><strong><i class="fa-solid fa-id-card" style="color:#d4a373;"></i> Tarjeta de Fidelidad:</strong></label>
+          <input type="text" id="custId" placeholder="ID de cliente (Ej. CLI-5571)" style="text-transform: uppercase;">
+          <small class="fidelity-hint">Si tienes tarjeta digital, ingresa tu ID para registrar tu visita.</small>
+        </div>
+      </div>
+
+      <!-- Tipo de Entrega -->
+      <div class="form-group">
+        <label><strong>Tipo de entrega:</strong></label>
+        <div class="radio-row">
+          <label><input type="radio" name="deliveryType" value="sucursal" checked> Recoger en local</label>
+          <label><input type="radio" name="deliveryType" value="domicilio"> Envío a domicilio</label>
+        </div>
+      </div>
+
+      <!-- Campos Exclusivos de Domicilio -->
+      <div id="domicilioFields" class="hidden">
+        <p id="domicilioWarning" class="warning-text"></p>
+        
+        <label><strong>Ubicación para entrega:</strong></label>
+        <div class="location-btn-row">
+          <button type="button" class="btn-gps" id="btnGps">
+            <i class="fa-solid fa-location-crosshairs"></i> GPS actual
+          </button>
+          <button type="button" class="btn-map" id="btnOpenMap">
+            <i class="fa-solid fa-map-location-dot"></i> Ajustar ubicación
+          </button>
+        </div>
+        <p id="gpsStatus" class="gps-status"></p>
+
+        <input type="text" id="custAddress" placeholder="Calle, número exterior/interior y colonia">
+        <textarea id="custRef" placeholder="Referencias (color de casa/portón, entre qué calles, etc.)" rows="2"></textarea>
+      </div>
+
+      <!-- Modalidad de Pago -->
+      <div class="form-group">
+        <label><strong>Transferencia:</strong></label>
+        <select id="depositOption">
+          <option value="100">Pagar Total Completo (100%)</option>
+          <option value="50">Anticipo del 50% para elaborar</option>
+        </select>
+      </div>
+
+      <!-- Datos Bancarios -->
+      <div class="bank-box">
+        <p><strong>Datos de Transferencia:</strong></p>
+        <p>Banco: <span>BBVA</span></p>
+        <p>CLABE: <span>012180015805050695</span></p>
+        <p>Titular: <span>Kesia Valdez</span></p>
+        <p><span>Gracias por su preferencia.</span></p>
+      </div>
+    </div>
+
+    <!-- Pie Fijo -->
+    <div class="cart-summary">
+      <div class="row-total">
+        <span>Total:</span>
+        <strong id="cartTotal">$0.00</strong>
+      </div>
+      <div class="anticipo-calc">
+        A transferir ahora: <strong id="montoATransferir">$0.00</strong><br>
+        <small id="saldoPendienteLabel" class="text-muted"></small>
+      </div>
+      <button class="btn-checkout" id="checkoutBtn" disabled>
+        <i class="fa-brands fa-whatsapp"></i> Generar Ticket y Enviar a WhatsApp
+      </button>
+    </div>
+  </aside>
+
+  <!-- Modal Mapa -->
+  <div class="modal-ticket" id="mapModal">
+    <div class="ticket-box map-modal-box">
+      <h3>Ajustar Ubicación</h3>
+      <p class="ticket-note" style="color: #444; font-weight: 400;">Mueve el marcador rojo exactamente a tu domicilio y haz clic en confirmar.</p>
+      <div id="mapContainer" style="height: 260px; width: 100%; border-radius: 8px; margin-bottom: 12px;"></div>
+      <button type="button" id="confirmMapBtn" class="btn-download" style="border:none; cursor:pointer;">Confirmar Ubicación</button>
+      <button type="button" id="closeMapBtn" class="close-map-btn">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- Modal Ticket Generado -->
+  <div class="modal-ticket" id="ticketModal">
+    <div class="ticket-box">
+      <h3 style="color:#4a2c11;">Pedido Preparado</h3>
+      <p class="ticket-note">Descarga tu ticket y adjunta tu comprobante de transferencia al abrir WhatsApp para iniciar tu pedido.</p>
+      
+      <div class="canvas-wrapper">
+        <canvas id="ticketCanvas"></canvas>
+      </div>
+
+      <div class="ticket-actions">
+        <a id="downloadTicketBtn" class="btn-download" download="Ticket-Gusto-Culposo.png">
+          <i class="fa-solid fa-download"></i> Descargar Ticket
+        </a>
+        <button id="openWaBtn" class="btn-whatsapp">
+          <i class="fa-brands fa-whatsapp"></i> Ir a WhatsApp y Enviar Comprobante
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
