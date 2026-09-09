@@ -15,8 +15,7 @@ const catalog = [
     items: [
       { id: "o1", name: "4 Waffles", desc: "1 fruta, 1 topping y 1 aderezo", price: 65, type: "orden", numToppings: 1, numAderezos: 1, hasFruitBase: true },
       { id: "o2", name: "8 Mini donitas", desc: "1 fruta, 1 topping y 1 aderezo", price: 50, type: "orden", numToppings: 1, numAderezos: 1, hasFruitBase: true },
-      { id: "o3", name: "15 Mini hot cakes", desc: "1 fruta, 1 topping y 1 aderezo", price: 65, type: "orden", numToppings: 1, numAderezos: 1, hasFruitBase: true },
-      { id: "o4", name: "Banana Split", desc: "Plátano con helados y toppings", price: 100, type: "directo", numToppings: 0, numAderezos: 0, hasFruitBase: false }
+      { id: "o3", name: "15 Mini hot cakes", desc: "1 fruta, 1 topping y 1 aderezo", price: 65, type: "orden", numToppings: 1, numAderezos: 1, hasFruitBase: true }
     ]
   },
   {
@@ -968,6 +967,15 @@ openWaBtn.addEventListener('click', async () => {
     openWaBtn.textContent = "Ir a WhatsApp y Enviar Comprobante";
     ticketModal.classList.remove('active');
     window.open(currentWaURL, '_blank');
+    // 1. Vacías el arreglo o la lista de productos del carrito
+    carrito = []; 
+
+// 2. Actualizas la vista del carrito para que se ponga en 0
+    actualizarCarrito(); 
+
+// 3. (Opcional) Si tienes campos de texto como nombre o dirección, los limpias así:
+    document.getElementById('nombreCliente').value = '';
+    document.getElementById('direccionCliente').value = '';
   }
 });
 
