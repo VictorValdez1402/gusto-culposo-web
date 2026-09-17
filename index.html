@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- ==========================================================================
+       BLOQUE 1: METADATOS, FUENTES Y HOJAS DE ESTILO
+       ========================================================================== -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gusto Culposo | Pedidos</title>
@@ -11,7 +14,9 @@
 </head>
 <body>
 
-  <!-- Barra de Navegacion Sticky -->
+  <!-- ==========================================================================
+       BLOQUE 2: NAVBAR SUPERIOR
+       ========================================================================== -->
   <header class="navbar">
     <div class="logo">
       <div class="brand-text">
@@ -29,17 +34,18 @@
     </div>
   </header>
 
-  <!-- Banner Extendido -->
+  <!-- ==========================================================================
+       BLOQUE 3: HERO BANNER Y AVISO DE ENVÍO
+       ========================================================================== -->
   <section class="hero-banner">
     <img src="banner.jpg" alt="Gusto Culposo Banner" class="hero-banner-img">
   </section>
 
-<!-- Barra de Aviso -->
   <section class="alert-bar">
     <i class="fa-solid fa-motorcycle" style="margin-right: 6px;"></i> Envíos a domicilio disponibles a partir de <strong>$300 MXN</strong>
   </section>
 
-  <!-- Pestañas de Navegacion (Menu / Cotiza tu evento) -->
+  <!-- Pestañas de Navegación -->
   <nav class="sub-nav-tabs">
     <button type="button" class="tab-btn active" id="tabMenuBtn" onclick="switchTab('menu')">
       <i class="fa-solid fa-utensils"></i> Menú
@@ -49,12 +55,13 @@
     </button>
   </nav>
 
-  <!-- Seccion Dinamica: Catalogo de Menú -->
+  <!-- ==========================================================================
+       BLOQUE 4: SECCIÓN DINÁMICA DEL CATÁLOGO Y COTIZACIÓN
+       ========================================================================== -->
   <main class="container" id="catalogoSection">
     <div id="productSections"></div>
   </main>
 
-  <!-- Seccion Dinamica: Cotiza tu evento (Oculta por defecto) -->
   <section class="container hidden" id="cotizaSection">
     <div class="coming-soon-card">
       <i class="fa-solid fa-person-digging coming-soon-icon"></i>
@@ -63,100 +70,12 @@
     </div>
   </section>
 
-<!-- Pie de Pagina Corporativo (Footer) -->
-  <footer class="main-footer">
-    <div class="footer-top-bar">
-      <div class="footer-contact-item">
-        <div class="footer-contact-icon">
-          <i class="fa-solid fa-headset"></i>
-        </div>
-        <div class="footer-contact-text">
-          <span>Servicio al Cliente:</span>
-          <strong><a href="tel:5661757432">56-61-75-74-32</a></strong>
-        </div>
-      </div>
-
-      <div class="footer-contact-item">
-        <div class="footer-contact-icon whatsapp-icon">
-          <i class="fa-brands fa-whatsapp"></i>
-        </div>
-        <div class="footer-contact-text">
-          <span>Envíanos un WhatsApp:</span>
-          <strong><a href="https://wa.me/525661757432" target="_blank">56-61-75-74-32</a></strong>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-columns-container">
-      <!-- Columna Ayuda -->
-      <div class="footer-col">
-        <h4>Ayuda</h4>
-        <ul>
-          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('comoPedir')">¿Cómo hacer un pedido?</button></li>
-          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('anticipos')">Pago y Anticipo (50% / 100%)</button></li>
-          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('entregas')">Envíos y Ubicación GPS</button></li>
-          <li><a href="tel:5661757432" class="footer-link-btn">Servicio al Cliente</a></li>
-        </ul>
-      </div>
-
-      <!-- Columna Servicios -->
-      <div class="footer-col">
-        <h4>Servicios</h4>
-        <ul>
-          <li><button type="button" class="footer-link-btn" onclick="scrollToCatalog()">Menú Completo</button></li>
-          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('mesaEventos')">Mesa de Postres & Snacks para Eventos</button></li>
-          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('paquetes')">Paquetes para Fiestas</button></li>
-        </ul>
-      </div>
-
-      <!-- Columna Empresa -->
-      <div class="footer-col">
-        <h4>Empresa</h4>
-        <ul>
-          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('conocenos')">Conócenos</button></li>
-          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('expos')">Participación en Expos</button></li>
-          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('corporativos')">Participación en Corporativos</button></li>
-          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('eventos')">Participación en Eventos</button></li>
-          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('privacidad')">Aviso de Privacidad</button></li>
-          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('terminos')">Términos y Condiciones</button></li>
-        </ul>
-      </div>
-
-      <!-- Columna Redes e Info -->
-      <div class="footer-col footer-col-social">
-        <h4>Síguenos</h4>
-        <p class="social-text">Descubre promociones y nuevos antojos en nuestras redes:</p>
-        <div class="social-links-row">
-          <a href="https://instagram.com/gustoculposo_mx_" target="_blank" class="social-circle-btn" aria-label="Instagram">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-          <a href="https://wa.me/525661757432" target="_blank" class="social-circle-btn" aria-label="WhatsApp">
-            <i class="fa-brands fa-whatsapp"></i>
-          </a>
-          <a href="mailto:gustoculposo31@gmail.com" class="social-circle-btn" aria-label="Correo electrónico">
-            <i class="fa-solid fa-envelope"></i>
-          </a>
-        </div>
-        <div class="social-ig-tag">
-          <span>Instagram:</span> <strong>@gustoculposo_mx_</strong>
-        </div>
-        <div class="social-ig-tag" style="margin-top: 4px;">
-          <span>Correo:</span> <strong><a href="mailto:gustoculposo31@gmail.com" style="color: #4a2c11; text-decoration: none;">gustoculposo31@gmail.com</a></strong>
-        </div>
-      </div>
-    </div>
-
-    <!-- Barra Inferior de Derechos (Fuera de las columnas para que abarque todo el ancho) -->
-    <div class="footer-bottom-bar">
-      <p>Gusto Culposo - Negocio de Postres y Snacks.</p>
-      <p class="footer-address">Priv. Guadalupe #34, Col. Pantitlán. Todos los derechos reservados.</p>
-    </div>
-  </footer>
-
-  <!-- Fondo Oscuro Modal -->
+  <!-- ==========================================================================
+       BLOQUE 5: MODALES (EXTRAS, INFO, REVISTA Y MAPA)
+       ========================================================================== -->
   <div class="modal-backdrop" id="modalBackdrop"></div>
 
-  <!-- Modal Portada de Revista (Estrategia de Marketing) -->
+  <!-- Modal Portada de Revista -->
   <div class="modal-ticket" id="revistaModal">
     <div class="revista-box">
       <button type="button" class="revista-close-btn" id="closeRevistaBtn">&times;</button>
@@ -182,7 +101,7 @@
     </div>
   </div>
 
-  <!-- Modal Selector de Preparacion Base y Extras -->
+  <!-- Modal Selector de Preparación y Extras (Sin Plátano) -->
   <div class="modal-ticket" id="extrasModal">
     <div class="ticket-box extras-modal-box">
       <h3 id="extrasItemTitle" style="color: #4a2c11; margin-bottom: 2px;">Personalizar</h3>
@@ -203,7 +122,6 @@
           <p class="subpanel-title">Elige qué fruta extra agregar:</p>
           <div class="option-pill-grid">
             <label class="option-pill"><input type="radio" name="fruitChoice" value="Fresa" checked> Fresa</label>
-            <label class="option-pill"><input type="radio" name="fruitChoice" value="Plátano"> Plátano</label>
             <label class="option-pill"><input type="radio" name="fruitChoice" value="Uva"> Uva</label>
             <label class="option-pill"><input type="radio" name="fruitChoice" value="Durazno"> Durazno</label>
             <label class="option-pill"><input type="radio" name="fruitChoice" value="Mixta"> Mixta</label>
@@ -233,7 +151,41 @@
     </div>
   </div>
 
-  <!-- Panel Lateral del Carrito -->
+  <!-- Modal Mapa -->
+  <div class="modal-ticket" id="mapModal">
+    <div class="ticket-box map-modal-box">
+      <h3>Ajustar Ubicación</h3>
+      <p class="ticket-note" style="color: #444; font-weight: 400;">Mueve el marcador rojo exactamente a tu domicilio y haz clic en confirmar.</p>
+      <div id="mapContainer" style="height: 260px; width: 100%; border-radius: 8px; margin-bottom: 12px;"></div>
+      <button type="button" id="confirmMapBtn" class="btn-download" style="border:none; cursor:pointer;">Confirmar Ubicación</button>
+      <button type="button" id="closeMapBtn" class="close-map-btn">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- Modal Ticket Generado -->
+  <div class="modal-ticket" id="ticketModal">
+    <div class="ticket-box">
+      <h3 style="color:#4a2c11;">Pedido Preparado</h3>
+      <p class="ticket-note">Descarga tu ticket y adjunta tu comprobante de transferencia al abrir WhatsApp para iniciar tu pedido.</p>
+      
+      <div class="canvas-wrapper">
+        <canvas id="ticketCanvas"></canvas>
+      </div>
+
+      <div class="ticket-actions">
+        <a id="downloadTicketBtn" class="btn-download" download="Ticket-Gusto-Culposo.png">
+          <i class="fa-solid fa-download"></i> Descargar Ticket
+        </a>
+        <button id="openWaBtn" class="btn-whatsapp">
+          <i class="fa-brands fa-whatsapp"></i> Ir a WhatsApp y Enviar Comprobante
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       BLOQUE 6: SIDEBAR DEL CARRITO
+       ========================================================================== -->
   <aside class="cart-sidebar" id="cartSidebar">
     <div class="cart-header">
       <h3>Tu Pedido</h3>
@@ -305,7 +257,6 @@
       </div>
     </div>
 
-    <!-- Pie Fijo -->
     <div class="cart-summary">
       <div class="row-total">
         <span>Total:</span>
@@ -321,38 +272,96 @@
     </div>
   </aside>
 
-  <!-- Modal Mapa -->
-  <div class="modal-ticket" id="mapModal">
-    <div class="ticket-box map-modal-box">
-      <h3>Ajustar Ubicación</h3>
-      <p class="ticket-note" style="color: #444; font-weight: 400;">Mueve el marcador rojo exactamente a tu domicilio y haz clic en confirmar.</p>
-      <div id="mapContainer" style="height: 260px; width: 100%; border-radius: 8px; margin-bottom: 12px;"></div>
-      <button type="button" id="confirmMapBtn" class="btn-download" style="border:none; cursor:pointer;">Confirmar Ubicación</button>
-      <button type="button" id="closeMapBtn" class="close-map-btn">Cancelar</button>
-    </div>
-  </div>
-
-  <!-- Modal Ticket Generado -->
-  <div class="modal-ticket" id="ticketModal">
-    <div class="ticket-box">
-      <h3 style="color:#4a2c11;">Pedido Preparado</h3>
-      <p class="ticket-note">Descarga tu ticket y adjunta tu comprobante de transferencia al abrir WhatsApp para iniciar tu pedido.</p>
-      
-      <div class="canvas-wrapper">
-        <canvas id="ticketCanvas"></canvas>
+  <!-- ==========================================================================
+       BLOQUE 7: FOOTER CORPORATIVO
+       ========================================================================== -->
+  <footer class="main-footer">
+    <div class="footer-top-bar">
+      <div class="footer-contact-item">
+        <div class="footer-contact-icon">
+          <i class="fa-solid fa-headset"></i>
+        </div>
+        <div class="footer-contact-text">
+          <span>Servicio al Cliente:</span>
+          <strong><a href="tel:5661757432">56-61-75-74-32</a></strong>
+        </div>
       </div>
 
-      <div class="ticket-actions">
-        <a id="downloadTicketBtn" class="btn-download" download="Ticket-Gusto-Culposo.png">
-          <i class="fa-solid fa-download"></i> Descargar Ticket
-        </a>
-        <button id="openWaBtn" class="btn-whatsapp">
-          <i class="fa-brands fa-whatsapp"></i> Ir a WhatsApp y Enviar Comprobante
-        </button>
+      <div class="footer-contact-item">
+        <div class="footer-contact-icon whatsapp-icon">
+          <i class="fa-brands fa-whatsapp"></i>
+        </div>
+        <div class="footer-contact-text">
+          <span>Envíanos un WhatsApp:</span>
+          <strong><a href="https://wa.me/525661757432" target="_blank">56-61-75-74-32</a></strong>
+        </div>
       </div>
     </div>
-  </div>
 
+    <div class="footer-columns-container">
+      <div class="footer-col">
+        <h4>Ayuda</h4>
+        <ul>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('comoPedir')">¿Cómo hacer un pedido?</button></li>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('anticipos')">Pago y Anticipo (50% / 100%)</button></li>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('entregas')">Envíos y Ubicación GPS</button></li>
+          <li><a href="tel:5661757432" class="footer-link-btn">Servicio al Cliente</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><button type="button" class="footer-link-btn" onclick="scrollToCatalog()">Menú Completo</button></li>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('mesaEventos')">Mesa de Postres & Snacks para Eventos</button></li>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('paquetes')">Paquetes para Fiestas</button></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('conocenos')">Conócenos</button></li>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('expos')">Participación en Expos</button></li>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('corporativos')">Participación en Corporativos</button></li>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('eventos')">Participación en Eventos</button></li>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('privacidad')">Aviso de Privacidad</button></li>
+          <li><button type="button" class="footer-link-btn" onclick="openInfoModal('terminos')">Términos y Condiciones</button></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-social">
+        <h4>Síguenos</h4>
+        <p class="social-text">Descubre promociones y nuevos antojos en nuestras redes:</p>
+        <div class="social-links-row">
+          <a href="https://instagram.com/gustoculposo_mx_" target="_blank" class="social-circle-btn" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://wa.me/525661757432" target="_blank" class="social-circle-btn" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+          <a href="mailto:gustoculposo31@gmail.com" class="social-circle-btn" aria-label="Correo electrónico">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+        </div>
+        <div class="social-ig-tag">
+          <span>Instagram:</span> <strong>@gustoculposo_mx_</strong>
+        </div>
+        <div class="social-ig-tag" style="margin-top: 4px;">
+          <span>Correo:</span> <strong><a href="mailto:gustoculposo31@gmail.com" style="color: #4a2c11; text-decoration: none;">gustoculposo31@gmail.com</a></strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+      <p>Gusto Culposo - Negocio de Postres y Snacks.</p>
+      <p class="footer-address">Priv. Guadalupe #34, Col. Pantitlán. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       BLOQUE 8: SCRIPTS
+       ========================================================================== -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="app.js"></script>
 </body>

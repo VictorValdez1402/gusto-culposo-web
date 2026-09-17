@@ -1,3 +1,6 @@
+/* ==========================================================================
+   BLOQUE 1: BASE Y VARIABLES GENERALES
+   ========================================================================== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,7 +13,9 @@ body {
   color: #2b2b2b;
 }
 
-/* Barra de Navegacion */
+/* ==========================================================================
+   BLOQUE 2: BARRA DE NAVEGACIÓN Y CARRITO FLOTANTE
+   ========================================================================== */
 .navbar {
   background: #ffe3e3;
   padding: 12px 24px;
@@ -48,7 +53,6 @@ body {
   font-weight: 500;
 }
 
-/* Carrito Circular y Badge Flotante Corregido */
 .cart-wrapper {
   position: relative !important;
   display: inline-flex !important;
@@ -101,7 +105,9 @@ body {
   z-index: 60;
 }
 
-/* Hero Banner */
+/* ==========================================================================
+   BLOQUE 3: HERO BANNER, AVISO Y PESTAÑAS
+   ========================================================================== */
 .hero-banner {
   width: 100%;
   height: clamp(260px, 36vw, 480px);
@@ -118,7 +124,6 @@ body {
   display: block;
 }
 
-/* Barra de Aviso */
 .alert-bar {
   background: #ffe3e3;
   color: #c92a2a;
@@ -128,7 +133,48 @@ body {
   border-bottom: 1px solid #fae3e3;
 }
 
-/* Catalogo y Categorias */
+.sub-nav-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  background: #fdfbf7;
+  padding: 12px 16px;
+  border-bottom: 2px solid #ebd9c4;
+  margin-bottom: 10px;
+}
+
+.tab-btn {
+  background: #ffffff;
+  color: #7f5539;
+  border: 1px solid #d8cbba;
+  padding: 10px 24px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+}
+
+.tab-btn:hover {
+  background: #ffe3e3;
+  color: #c92a2a;
+  border-color: #f8c3c3;
+}
+
+.tab-btn.active {
+  background: #4a2c11;
+  color: #ffffff;
+  border-color: #4a2c11;
+  box-shadow: 0 4px 10px rgba(74, 44, 17, 0.2);
+}
+
+/* ==========================================================================
+   BLOQUE 4: CATÁLOGO, TARJETAS Y VITRINA VISUAL DE FOTOS
+   ========================================================================== */
 .container {
   max-width: 1020px;
   margin: 28px auto 48px auto;
@@ -164,6 +210,67 @@ body {
   margin-bottom: 16px;
   padding-left: 16px;
   font-style: italic;
+}
+
+/* Vitrina de 3 imágenes arriba de los vasos */
+.crema-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.showcase-card {
+  border-radius: 14px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(139, 90, 43, 0.08);
+  border: 1px solid #f0e6d8;
+  transition: transform 0.2s ease;
+}
+
+.showcase-card:hover {
+  transform: translateY(-3px);
+}
+
+.showcase-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: #fdfaf6;
+}
+
+.showcase-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.showcase-tag {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(74, 44, 17, 0.85);
+  color: #ffffff;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  .crema-showcase-grid {
+    gap: 8px;
+  }
+  .showcase-tag {
+    font-size: 0.68rem;
+    padding: 2px 7px;
+  }
 }
 
 .grid-products {
@@ -228,7 +335,9 @@ body {
   background: #361f0a;
 }
 
-/* Modal de Personalizacion */
+/* ==========================================================================
+   BLOQUE 5: MODAL DE PERSONALIZACIÓN Y SELECCIONES
+   ========================================================================== */
 .extras-modal-box {
   text-align: left;
   max-height: 90vh;
@@ -378,7 +487,9 @@ body {
   padding: 0 4px;
 }
 
-/* Sidebar Carrito */
+/* ==========================================================================
+   BLOQUE 6: SIDEBAR DEL CARRITO Y FORMULARIO DE PAGO
+   ========================================================================== */
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -459,7 +570,6 @@ body {
   margin-top: 2px;
 }
 
-/* Botón de eliminar claro y en su propio recuadro */
 .delete-item-btn {
   background: #d90429 !important;
   color: #ffffff !important;
@@ -481,7 +591,6 @@ body {
   transform: scale(1.02);
 }
 
-/* Formulario */
 .form-group {
   margin-bottom: 10px;
   font-size: 0.85rem;
@@ -592,7 +701,6 @@ textarea {
   display: none !important;
 }
 
-/* Pie Fijo */
 .cart-summary {
   padding: 14px 18px;
   background: #fdfbf7;
@@ -640,7 +748,9 @@ textarea {
   cursor: not-allowed;
 }
 
-/* Estilos de la Portada de Revista Promocional sin scroll interno */
+/* ==========================================================================
+   BLOQUE 7: MODALES (REVISTA, TICKET, MAPA E INFORMACIÓN)
+   ========================================================================== */
 .revista-box {
   background: #ffffff;
   border-radius: 14px;
@@ -696,7 +806,6 @@ textarea {
   border-top: 1px solid #ebd9c4;
 }
 
-/* Modales */
 .modal-ticket {
   position: fixed;
   top: 0;
@@ -794,6 +903,77 @@ textarea {
   gap: 8px;
 }
 
+.info-modal-box {
+  max-width: 480px;
+  text-align: left;
+}
+
+.info-modal-box h3 {
+  color: #4a2c11;
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ebd9c4;
+  padding-bottom: 6px;
+}
+
+.info-modal-scroll {
+  max-height: 60vh;
+  overflow-y: auto;
+  font-size: 0.85rem;
+  color: #444;
+  line-height: 1.5;
+  padding-right: 6px;
+}
+
+.info-step-card {
+  background: #fdfaf6;
+  border-left: 3px solid #4a2c11;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  border-radius: 0 6px 6px 0;
+}
+
+.info-step-card strong {
+  color: #4a2c11;
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* Tarjeta Cotiza */
+.coming-soon-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 48px 24px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(139, 90, 43, 0.08);
+  border: 1px solid #f0e6d8;
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+.coming-soon-icon {
+  font-size: 3.5rem;
+  color: #e63946;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.coming-soon-card h3 {
+  font-size: 1.5rem;
+  color: #4a2c11;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.coming-soon-card p {
+  font-size: 0.95rem;
+  color: #6b5847;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   BLOQUE 8: PIE DE PÁGINA (FOOTER CORPORATIVO)
+   ========================================================================== */
 .main-footer {
   background: #fce4e4;
   color: #4a2c11;
@@ -944,6 +1124,11 @@ textarea {
   color: #4a2c11;
 }
 
+.social-ig-tag a:hover {
+  color: #c92a2a !important;
+  text-decoration: underline !important;
+}
+
 .footer-bottom-bar {
   width: 100%;
   background: #f7cccc;
@@ -959,117 +1144,4 @@ textarea {
   margin-top: 4px;
   color: #7f5539;
   font-weight: 400;
-}
-
-.info-modal-box {
-  max-width: 480px;
-  text-align: left;
-}
-
-.info-modal-box h3 {
-  color: #4a2c11;
-  font-size: 1.15rem;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #ebd9c4;
-  padding-bottom: 6px;
-}
-
-.info-modal-scroll {
-  max-height: 60vh;
-  overflow-y: auto;
-  font-size: 0.85rem;
-  color: #444;
-  line-height: 1.5;
-  padding-right: 6px;
-}
-
-.info-step-card {
-  background: #fdfaf6;
-  border-left: 3px solid #4a2c11;
-  padding: 8px 10px;
-  margin-bottom: 8px;
-  border-radius: 0 6px 6px 0;
-}
-
-.info-step-card strong {
-  color: #4a2c11;
-  display: block;
-  margin-bottom: 2px;
-}
-/* Estilo para enlace de correo en el footer */
-.social-ig-tag a:hover {
-  color: #c92a2a !important;
-  text-decoration: underline !important;
-}
-
-/* Estilos para las Pestañas de Navegación */
-.sub-nav-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  background: #fdfbf7;
-  padding: 12px 16px;
-  border-bottom: 2px solid #ebd9c4;
-  margin-bottom: 10px;
-}
-
-.tab-btn {
-  background: #ffffff;
-  color: #7f5539;
-  border: 1px solid #d8cbba;
-  padding: 10px 24px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-}
-
-.tab-btn:hover {
-  background: #ffe3e3;
-  color: #c92a2a;
-  border-color: #f8c3c3;
-}
-
-.tab-btn.active {
-  background: #4a2c11;
-  color: #ffffff;
-  border-color: #4a2c11;
-  box-shadow: 0 4px 10px rgba(74, 44, 17, 0.2);
-}
-
-/* Tarjeta de Próximamente para Cotizaciones */
-.coming-soon-card {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 48px 24px;
-  text-align: center;
-  box-shadow: 0 4px 20px rgba(139, 90, 43, 0.08);
-  border: 1px solid #f0e6d8;
-  max-width: 600px;
-  margin: 40px auto;
-}
-
-.coming-soon-icon {
-  font-size: 3.5rem;
-  color: #e63946;
-  margin-bottom: 16px;
-  display: block;
-}
-
-.coming-soon-card h3 {
-  font-size: 1.5rem;
-  color: #4a2c11;
-  font-weight: 800;
-  margin-bottom: 10px;
-}
-
-.coming-soon-card p {
-  font-size: 0.95rem;
-  color: #6b5847;
-  line-height: 1.5;
 }

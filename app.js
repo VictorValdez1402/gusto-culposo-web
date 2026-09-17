@@ -1,7 +1,10 @@
+/* ==========================================================================
+   BLOQUE 1: CATÁLOGO Y DATOS BASE
+   ========================================================================== */
 const catalog = [
   {
     category: "LOS QUE VAN CON CREMA",
-    subtitle: "Fresas, Uvas, Plátano o Durazno con crema",
+    subtitle: "Fresas, Uvas o Durazno con crema",
     items: [
       { id: "c1", name: "Vaso 10 oz", desc: "1 topping y 1 aderezo", price: 65, type: "crema", numToppings: 1, numAderezos: 1, hasFruitBase: true },
       { id: "c2", name: "Vaso 14 oz", desc: "2 toppings y 1 aderezo", price: 80, type: "crema", numToppings: 2, numAderezos: 1, hasFruitBase: true },
@@ -96,8 +99,12 @@ const aderezosList = [
   "Mermelada de fresa", "Mermelada de zarzamora", "Lechera", "Cajeta"
 ];
 
-const fruitList = ["Fresa", "Plátano", "Uva", "Durazno", "Mixta"];
+// Se retiró el plátano
+const fruitList = ["Fresa", "Uva", "Durazno", "Mixta"];
 
+/* ==========================================================================
+   BLOQUE 2: ESTADO GLOBAL Y SELECTORES DEL DOM
+   ========================================================================== */
 let cart = [];
 const MIN_DOMICILIO = 300;
 const WHATSAPP_PHONE = "525661757432"; 
@@ -167,7 +174,9 @@ const revistaModal = document.getElementById("revistaModal");
 const closeRevistaBtn = document.getElementById("closeRevistaBtn");
 const buyRevistaBtn = document.getElementById("buyRevistaBtn");
 
-// Mostrar la revista de marketing en cada recarga (Modo Pruebas)
+/* ==========================================================================
+   BLOQUE 3: MODAL REVISTA DE MARKETING
+   ========================================================================== */
 window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     if (revistaModal) revistaModal.classList.add('active');
@@ -216,29 +225,61 @@ if (buyRevistaBtn) {
   });
 }
 
+/* ==========================================================================
+   BLOQUE 4: RENDERIZADO DEL CATÁLOGO (CON VITRINA DE FOTOS)
+   ========================================================================== */
 function renderCatalog() {
-  productSections.innerHTML = catalog.map(cat => `
-    <section class="category-block">
-      <h3 class="category-title">${cat.category}</h3>
-      <p class="category-subtitle">${cat.subtitle}</p>
-      <div class="grid-products">
-        ${cat.items.map(item => `
-          <div class="card">
-            <div>
-              <h3>${item.name}</h3>
-              <p>${item.desc}</p>
-            </div>
-            <div>
-              <div class="price">$${item.price.toFixed(2)}</div>
-              <button class="add-btn" onclick="handleProductClick('${item.id}')">
-                <i class="fa-solid fa-plus"></i> Agregar
-              </button>
-            </div>
-          </div>
-        `).join('')}
+  productSections.innerHTML = catalog.map(cat => {
+    const isCrema = cat.category === "LOS QUE VAN CON CREMA";
+    
+    // Vitrina de 3 imágenes arriba de las tarjetas
+const visualShowcase = isCrema ? `
+  <div class="crema-showcase-grid">
+    <div class="showcase-card">
+      <div class="showcase-img-wrap">
+        <img src="img/vaso-fresas.jpg" alt="Fresas con Crema" class="showcase-img">
+        <span class="showcase-tag">Fresas</span>
       </div>
-    </section>
-  `).join('');
+    </div>
+    <div class="showcase-card">
+      <div class="showcase-img-wrap">
+        <img src="img/vaso-uvas.jpg" alt="Uvas con Crema" class="showcase-img">
+        <span class="showcase-tag">Uvas</span>
+      </div>
+    </div>
+    <div class="showcase-card">
+      <div class="showcase-img-wrap">
+        <img src="img/vaso-duraznos.jpg" alt="Duraznos con Crema" class="showcase-img">
+        <span class="showcase-tag">Duraznos</span>
+      </div>
+    </div>
+  </div>
+` : '';
+
+    return `
+      <section class="category-block">
+        <h3 class="category-title">${cat.category}</h3>
+        <p class="category-subtitle">${cat.subtitle}</p>
+        ${visualShowcase}
+        <div class="grid-products">
+          ${cat.items.map(item => `
+            <div class="card">
+              <div>
+                <h3>${item.name}</h3>
+                <p>${item.desc}</p>
+              </div>
+              <div>
+                <div class="price">$${item.price.toFixed(2)}</div>
+                <button class="add-btn" onclick="handleProductClick('${item.id}')">
+                  <i class="fa-solid fa-plus"></i> Agregar
+                </button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </section>
+    `;
+  }).join('');
 }
 
 function findProduct(id) {
@@ -249,6 +290,9 @@ function findProduct(id) {
   return null;
 }
 
+/* ==========================================================================
+   BLOQUE 5: MODAL DE PERSONALIZACIÓN Y EXTRAS
+   ========================================================================== */
 window.handleProductClick = function(id) {
   const product = findProduct(id);
   if (!product) return;
@@ -466,6 +510,9 @@ cancelExtrasBtn.addEventListener('click', () => {
   pendingItemForModal = null;
 });
 
+/* ==========================================================================
+   BLOQUE 6: LÓGICA Y CÁLCULOS DEL CARRITO
+   ========================================================================== */
 function addToCartDirect(product, extras, baseConfig) {
   const extrasKey = extras.map(e => e.name).sort().join('|');
   let baseStr = "";
@@ -588,6 +635,9 @@ function validateTotals() {
 document.querySelectorAll('input[name="deliveryType"]').forEach(r => r.addEventListener('change', validateTotals));
 depositOption.addEventListener('change', validateTotals);
 
+/* ==========================================================================
+   BLOQUE 7: VALIDACIÓN DE TELÉFONO Y GEOLOCALIZACIÓN (GPS / MAPA)
+   ========================================================================== */
 function isValidPhoneNumber(phone) {
   const cleaned = phone.replace(/\D/g, '');
   if (cleaned.length !== 10) return { valid: false, msg: "El teléfono debe contener exactamente 10 dígitos." };
@@ -696,6 +746,9 @@ confirmMapBtn.addEventListener('click', async () => {
   mapModal.classList.remove('active');
 });
 
+/* ==========================================================================
+   BLOQUE 8: GENERACIÓN DEL TICKET DIGITAL Y WHATSAPP
+   ========================================================================== */
 checkoutBtn.addEventListener('click', () => {
   const name = custName.value.trim() || "Cliente General";
   const rawPhone = custPhone.value.trim();
@@ -967,18 +1020,20 @@ openWaBtn.addEventListener('click', async () => {
     openWaBtn.textContent = "Ir a WhatsApp y Enviar Comprobante";
     ticketModal.classList.remove('active');
     window.open(currentWaURL, '_blank');
-    // 1. Vacías el arreglo o la lista de productos del carrito
-    carrito = []; 
-
-// 2. Actualizas la vista del carrito para que se ponga en 0
-    actualizarCarrito(); 
-
-// 3. (Opcional) Si tienes campos de texto como nombre o dirección, los limpias así:
-    document.getElementById('nombreCliente').value = '';
-    document.getElementById('direccionCliente').value = '';
+    
+    // Limpieza post-envío
+    cart = [];
+    updateCart();
+    custName.value = '';
+    custAddress.value = '';
+    custPhone.value = '';
+    custRef.value = '';
   }
 });
 
+/* ==========================================================================
+   BLOQUE 9: CONTROLES DE UI, PESTAÑAS Y MODALES INFORMATIVOS
+   ========================================================================== */
 openCartBtn.addEventListener('click', () => {
   cartSidebar.classList.add('open');
   modalBackdrop.classList.add('active');
@@ -1179,8 +1234,7 @@ closeInfoModalBtn.addEventListener('click', () => {
   infoModal.classList.remove('active');
 });
 
-renderCatalog();
-// Escucha nativa imperativa para el botón de eliminar del carrito
+// Escucha para eliminar ítems del carrito
 document.addEventListener('click', function(e) {
   const targetBtn = e.target.closest('[data-delete-id]');
   if (targetBtn) {
@@ -1190,7 +1244,8 @@ document.addEventListener('click', function(e) {
     }
   }
 });
-// Función para cambiar de pestaña entre Menú y Cotiza tu evento
+
+// Selector de pestañas: Menú / Cotiza
 window.switchTab = function(tabName) {
   const menuBtn = document.getElementById("tabMenuBtn");
   const cotizaBtn = document.getElementById("tabCotizaBtn");
@@ -1209,3 +1264,6 @@ window.switchTab = function(tabName) {
     catalogoSec.classList.add('hidden');
   }
 };
+
+// Inicialización
+renderCatalog();
