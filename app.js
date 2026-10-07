@@ -218,27 +218,27 @@ function renderCatalog() {
     
     // Vitrina de 3 imágenes arriba de las tarjetas
 const visualShowcase = isCrema ? `
-  <div class="crema-showcase-grid">
-    <div class="showcase-card">
-      <div class="showcase-img-wrap">
-        <img src="img/vaso-fresas.jpg" alt="Fresas con Crema" class="showcase-img">
-        <span class="showcase-tag">Fresas</span>
+      <div class="crema-showcase-grid">
+        <div class="showcase-card" onclick="openImageViewer('img/vaso-fresas.jpg')">
+          <div class="showcase-img-wrap">
+            <img src="img/vaso-fresas.jpg" alt="Fresas con Crema" class="showcase-img">
+            <span class="showcase-tag">Fresas</span>
+          </div>
+        </div>
+        <div class="showcase-card" onclick="openImageViewer('img/vaso-uvas.jpg')">
+          <div class="showcase-img-wrap">
+            <img src="img/vaso-uvas.jpg" alt="Uvas con Crema" class="showcase-img">
+            <span class="showcase-tag">Uvas</span>
+          </div>
+        </div>
+        <div class="showcase-card" onclick="openImageViewer('img/vaso-duraznos.jpg')">
+          <div class="showcase-img-wrap">
+            <img src="img/vaso-duraznos.jpg" alt="Duraznos con Crema" class="showcase-img">
+            <span class="showcase-tag">Duraznos</span>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="showcase-card">
-      <div class="showcase-img-wrap">
-        <img src="img/vaso-uvas.jpg" alt="Uvas con Crema" class="showcase-img">
-        <span class="showcase-tag">Uvas</span>
-      </div>
-    </div>
-    <div class="showcase-card">
-      <div class="showcase-img-wrap">
-        <img src="img/vaso-duraznos.jpg" alt="Duraznos con Crema" class="showcase-img">
-        <span class="showcase-tag">Duraznos</span>
-      </div>
-    </div>
-  </div>
-` : '';
+    ` : '';
 
     return `
       <section class="category-block">
@@ -1016,7 +1016,7 @@ openWaBtn.addEventListener('click', async () => {
 });
 
 /* ==========================================================================
-   BLOQUE 9: CONTROLES DE UI, PESTAÑAS Y MODALES INFORMATIVOS
+   BLOQUE 9: CONTROLES DE UI, PESTAÑAS, MODALES Y VISOR DE FOTOS
    ========================================================================== */
 openCartBtn.addEventListener('click', () => {
   cartSidebar.classList.add('open');
@@ -1248,6 +1248,33 @@ window.switchTab = function(tabName) {
     catalogoSec.classList.add('hidden');
   }
 };
+
+/* ==========================================================================
+   CONTROLADOR DEL VISOR DE FOTOS AMPLIADAS
+   ========================================================================== */
+const imageViewerModal = document.getElementById("imageViewerModal");
+const imageViewerImg = document.getElementById("imageViewerImg");
+const closeImageViewerBtn = document.getElementById("closeImageViewerBtn");
+
+window.openImageViewer = function(src) {
+  if (!imageViewerModal || !imageViewerImg) return;
+  imageViewerImg.src = src;
+  imageViewerModal.classList.add("active");
+};
+
+if (closeImageViewerBtn) {
+  closeImageViewerBtn.addEventListener("click", () => {
+    imageViewerModal.classList.remove("active");
+  });
+}
+
+if (imageViewerModal) {
+  imageViewerModal.addEventListener("click", (e) => {
+    if (e.target === imageViewerModal) {
+      imageViewerModal.classList.remove("active");
+    }
+  });
+}
 
 // Inicialización
 renderCatalog();
