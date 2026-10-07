@@ -754,8 +754,8 @@ textarea {
 .revista-box {
   background: #ffffff;
   border-radius: 14px;
-  max-width: 380px;
-  width: 92%;
+  max-width: 480px;
+  width: 95%;
   position: relative;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -795,7 +795,7 @@ textarea {
 .revista-poster-img {
   width: 100%;
   height: auto;
-  max-height: 75vh;
+  max-height: 82vh;
   object-fit: contain;
   display: block;
 }
