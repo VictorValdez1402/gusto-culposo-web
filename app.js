@@ -175,7 +175,7 @@ const closeRevistaBtn = document.getElementById("closeRevistaBtn");
 const buyRevistaBtn = document.getElementById("buyRevistaBtn");
 
 /* ==========================================================================
-   BLOQUE 3: MODAL REVISTA DE MARKETING
+   BLOQUE 3: MODAL PROMOCIONAL - COTIZACIÓN DE EVENTOS
    ========================================================================== */
 window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
@@ -201,27 +201,11 @@ if (buyRevistaBtn) {
   buyRevistaBtn.addEventListener('click', () => {
     revistaModal.classList.remove('active');
 
-    const productoEstrella = {
-      id: "c3",
-      name: "Vaso 16 oz Edicion Especial",
-      price: 100
-    };
+    const mensajeEvento = `¡Hola, Gusto Culposo! 👋✨\nVi la información de su Mesa de Snacks y Postres en su página web y me gustaría solicitar una cotización para un evento.\n\n¿Me podrían compartir qué paquetes y opciones manejan, por favor?`;
 
-    const baseConfig = {
-      fruit: "Fresa",
-      toppings: ["Mini oreos", "Lechera"],
-      aderezos: ["Hershey's chocolate"]
-    };
+    const cotizacionWaUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(mensajeEvento)}`;
 
-    const extrasEspeciales = [
-      { name: "Crema batida", price: 15 },
-      { name: "Escarchado Nutella", price: 15 }
-    ];
-
-    addToCartDirect(productoEstrella, extrasEspeciales, baseConfig);
-
-    cartSidebar.classList.add('open');
-    modalBackdrop.classList.add('active');
+    window.open(cotizacionWaUrl, '_blank');
   });
 }
 
