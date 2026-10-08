@@ -244,19 +244,19 @@ function renderCatalog() {
         <div class="crema-showcase-grid">
           <div class="showcase-card" onclick="openImageViewer('img/orden-waffles.jpg')">
             <div class="showcase-img-wrap">
-              <img src="img/orden-waffles.png" alt="4 Waffles" class="showcase-img">
+              <img src="img/orden-waffles.jpg" alt="4 Waffles" class="showcase-img">
               <span class="showcase-tag">Waffles</span>
             </div>
           </div>
           <div class="showcase-card" onclick="openImageViewer('img/orden-donitas.jpg')">
             <div class="showcase-img-wrap">
-              <img src="img/orden-donitas.png" alt="8 Mini donitas" class="showcase-img">
+              <img src="img/orden-donitas.jpg" alt="8 Mini donitas" class="showcase-img">
               <span class="showcase-tag">Mini Donitas</span>
             </div>
           </div>
           <div class="showcase-card" onclick="openImageViewer('img/orden-hotcakes.jpg')">
             <div class="showcase-img-wrap">
-              <img src="img/orden-hotcakes.png" alt="15 Mini hot cakes" class="showcase-img">
+              <img src="img/orden-hotcakes.jpg" alt="15 Mini hot cakes" class="showcase-img">
               <span class="showcase-tag">Mini Hot Cakes</span>
             </div>
           </div>
