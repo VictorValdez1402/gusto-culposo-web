@@ -210,35 +210,59 @@ if (buyRevistaBtn) {
 }
 
 /* ==========================================================================
-   BLOQUE 4: RENDERIZADO DEL CATÁLOGO (CON VITRINA DE FOTOS)
+   BLOQUE 4: RENDERIZADO DEL CATÁLOGO (CON VITRINAS DE FOTOS Y VISOR)
    ========================================================================== */
 function renderCatalog() {
   productSections.innerHTML = catalog.map(cat => {
-    const isCrema = cat.category === "LOS QUE VAN CON CREMA";
-    
-    // Vitrina de 3 imágenes arriba de las tarjetas
-const visualShowcase = isCrema ? `
-      <div class="crema-showcase-grid">
-        <div class="showcase-card" onclick="openImageViewer('img/vaso-fresas.jpg')">
-          <div class="showcase-img-wrap">
-            <img src="img/vaso-fresas.jpg" alt="Fresas con Crema" class="showcase-img">
-            <span class="showcase-tag">Fresas</span>
+    let visualShowcase = '';
+
+    if (cat.category === "LOS QUE VAN CON CREMA") {
+      visualShowcase = `
+        <div class="crema-showcase-grid">
+          <div class="showcase-card" onclick="openImageViewer('img/vaso-fresas.jpg')">
+            <div class="showcase-img-wrap">
+              <img src="img/vaso-fresas.jpg" alt="Fresas con Crema" class="showcase-img">
+              <span class="showcase-tag">Fresas</span>
+            </div>
+          </div>
+          <div class="showcase-card" onclick="openImageViewer('img/vaso-uvas.jpg')">
+            <div class="showcase-img-wrap">
+              <img src="img/vaso-uvas.jpg" alt="Uvas con Crema" class="showcase-img">
+              <span class="showcase-tag">Uvas</span>
+            </div>
+          </div>
+          <div class="showcase-card" onclick="openImageViewer('img/vaso-duraznos.jpg')">
+            <div class="showcase-img-wrap">
+              <img src="img/vaso-duraznos.jpg" alt="Duraznos con Crema" class="showcase-img">
+              <span class="showcase-tag">Duraznos</span>
+            </div>
           </div>
         </div>
-        <div class="showcase-card" onclick="openImageViewer('img/vaso-uvas.jpg')">
-          <div class="showcase-img-wrap">
-            <img src="img/vaso-uvas.jpg" alt="Uvas con Crema" class="showcase-img">
-            <span class="showcase-tag">Uvas</span>
+      `;
+    } else if (cat.category === "ÓRDENES") {
+      visualShowcase = `
+        <div class="crema-showcase-grid">
+          <div class="showcase-card" onclick="openImageViewer('img/orden-waffles.jpg')">
+            <div class="showcase-img-wrap">
+              <img src="img/orden-waffles.png" alt="4 Waffles" class="showcase-img">
+              <span class="showcase-tag">Waffles</span>
+            </div>
+          </div>
+          <div class="showcase-card" onclick="openImageViewer('img/orden-donitas.jpg')">
+            <div class="showcase-img-wrap">
+              <img src="img/orden-donitas.png" alt="8 Mini donitas" class="showcase-img">
+              <span class="showcase-tag">Mini Donitas</span>
+            </div>
+          </div>
+          <div class="showcase-card" onclick="openImageViewer('img/orden-hotcakes.jpg')">
+            <div class="showcase-img-wrap">
+              <img src="img/orden-hotcakes.png" alt="15 Mini hot cakes" class="showcase-img">
+              <span class="showcase-tag">Mini Hot Cakes</span>
+            </div>
           </div>
         </div>
-        <div class="showcase-card" onclick="openImageViewer('img/vaso-duraznos.jpg')">
-          <div class="showcase-img-wrap">
-            <img src="img/vaso-duraznos.jpg" alt="Duraznos con Crema" class="showcase-img">
-            <span class="showcase-tag">Duraznos</span>
-          </div>
-        </div>
-      </div>
-    ` : '';
+      `;
+    }
 
     return `
       <section class="category-block">
@@ -250,10 +274,7 @@ const visualShowcase = isCrema ? `
             <div class="card">
               <div>
                 <h3>${item.name}</h3>
-                <p>${item.desc}</p>
-              </div>
-              <div>
-                <div class="price">$${item.price.toFixed(2)}</div>
+                <p>${item.desc}</p>               </div>               <div>                 <div class="price">$${item.price.toFixed(2)}</div>
                 <button class="add-btn" onclick="handleProductClick('${item.id}')">
                   <i class="fa-solid fa-plus"></i> Agregar
                 </button>
@@ -264,14 +285,6 @@ const visualShowcase = isCrema ? `
       </section>
     `;
   }).join('');
-}
-
-function findProduct(id) {
-  for (const cat of catalog) {
-    const found = cat.items.find(i => i.id === id);
-    if (found) return found;
-  }
-  return null;
 }
 
 /* ==========================================================================
