@@ -21,12 +21,11 @@ const catalog = [
       { id: "o3", name: "15 Mini hot cakes", desc: "1 fruta, 1 topping y 1 aderezo", price: 65, type: "orden", numToppings: 1, numAderezos: 1, hasFruitBase: true }
     ]
   },
-  {
+{
     category: "POSTRES",
     subtitle: "Deliciosas rebanadas",
     items: [
       { id: "p1", name: "Pay de Limón", desc: "1 topping y 1 líquido", price: 40, type: "postre", numToppings: 1, numAderezos: 1, hasFruitBase: false },
-      { id: "p2", name: "Pay de Oreo", desc: "1 topping y 1 líquido", price: 40, type: "postre", numToppings: 1, numAderezos: 1, hasFruitBase: false },
       { id: "p3", name: "Flan Napolitano", desc: "1 topping y 1 líquido", price: 40, type: "postre", numToppings: 1, numAderezos: 1, hasFruitBase: false }
     ]
   },
@@ -258,6 +257,23 @@ function renderCatalog() {
             <div class="showcase-img-wrap">
               <img src="img/orden-hotcakes.jpg" alt="15 Mini hot cakes" class="showcase-img">
               <span class="showcase-tag">Mini Hot Cakes</span>
+            </div>
+          </div>
+        </div>
+      `;
+    } else if (cat.category === "POSTRES") {
+      visualShowcase = `
+        <div class="crema-showcase-grid postres-showcase-grid">
+          <div class="showcase-card" onclick="openImageViewer('img/postre-limon.jpg')">
+            <div class="showcase-img-wrap">
+              <img src="img/postre-limon.jpg" alt="Pay de Limón" class="showcase-img">
+              <span class="showcase-tag">Pay de Limón</span>
+            </div>
+          </div>
+          <div class="showcase-card" onclick="openImageViewer('img/postre-flan.jpg')">
+            <div class="showcase-img-wrap">
+              <img src="img/postre-flan.jpg" alt="Flan Napolitano" class="showcase-img">
+              <span class="showcase-tag">Flan Napolitano</span>
             </div>
           </div>
         </div>
