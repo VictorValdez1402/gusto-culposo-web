@@ -222,15 +222,18 @@ body {
 
 .postres-showcase-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px; /* Mismo gap que .grid-products */
-  margin-bottom: 18px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  max-width: 650px;
+  margin: 0 auto 18px auto;
 }
 
 .postres-cards-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 18px;
+  max-width: 650px;
+  margin: 0 auto;
 }
 
 .showcase-card {
@@ -280,7 +283,8 @@ body {
 @media (max-width: 600px) {
   .postres-showcase-grid,
   .postres-cards-grid {
-    grid-template-columns: 1fr; /* En celular una debajo de otra en orden */
+    grid-template-columns: 1fr;
+    max-width: 100%;
   }
 }
 
