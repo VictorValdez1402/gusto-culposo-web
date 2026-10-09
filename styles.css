@@ -221,10 +221,16 @@ body {
 }
 
 .postres-showcase-grid {
-  grid-template-columns: repeat(2, 1fr);
-  max-width: 680px;
-  margin-left: auto;
-  margin-right: auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px; /* Mismo gap que .grid-products */
+  margin-bottom: 18px;
+}
+
+.postres-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
 }
 
 .showcase-card {
@@ -272,12 +278,9 @@ body {
 }
 
 @media (max-width: 600px) {
-  .crema-showcase-grid {
-    gap: 8px;
-  }
-  .showcase-tag {
-    font-size: 0.68rem;
-    padding: 2px 7px;
+  .postres-showcase-grid,
+  .postres-cards-grid {
+    grid-template-columns: 1fr; /* En celular una debajo de otra en orden */
   }
 }
 

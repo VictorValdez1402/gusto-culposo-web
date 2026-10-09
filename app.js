@@ -280,12 +280,16 @@ function renderCatalog() {
       `;
     }
 
+    // AQUÍ ES DONDE VAN ESAS LÍNEAS:
+    const isPostres = cat.category === "POSTRES";
+    const gridClass = isPostres ? "postres-cards-grid" : "grid-products";
+
     return `
       <section class="category-block">
         <h3 class="category-title">${cat.category}</h3>
         <p class="category-subtitle">${cat.subtitle}</p>
         ${visualShowcase}
-        <div class="grid-products">
+        <div class="${gridClass}">
           ${cat.items.map(item => `
             <div class="card">
               <div>
@@ -303,6 +307,13 @@ function renderCatalog() {
   }).join('');
 }
 
+function findProduct(id) {
+  for (const cat of catalog) {
+    const found = cat.items.find(i => i.id === id);
+    if (found) return found;
+  }
+  return null;
+}
 /* ==========================================================================
    BLOQUE 5: MODAL DE PERSONALIZACIÓN Y EXTRAS
    ========================================================================== */
