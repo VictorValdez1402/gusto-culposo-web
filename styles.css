@@ -223,18 +223,24 @@ body {
 .postres-showcase-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
-  max-width: 650px;
-  margin: 0 auto 18px auto;
+  gap: 12px;
+  max-width: 520px;
+  margin: 0 auto 16px auto;
 }
 
 .postres-cards-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
-  max-width: 650px;
+  gap: 14px;
+  max-width: 520px;
   margin: 0 auto;
 }
+
+.postres-cards-grid {
+    grid-template-columns: 1fr; /* Las tarjetas de compra pueden quedar en lista */
+    gap: 12px;
+    max-width: 100%;
+  }
 
 .showcase-card {
   border-radius: 14px;
@@ -281,9 +287,9 @@ body {
 }
 
 @media (max-width: 600px) {
-  .postres-showcase-grid,
-  .postres-cards-grid {
-    grid-template-columns: 1fr;
+  .postres-showcase-grid {
+    grid-template-columns: repeat(2, 1fr); /* Conserva las 2 fotos una al lado de otra */
+    gap: 8px; /* Mismo espaciado compacto que en órdenes */
     max-width: 100%;
   }
 }
